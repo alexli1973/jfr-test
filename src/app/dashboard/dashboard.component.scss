@@ -1,0 +1,23 @@
+.tabs-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  .tab-item {
+    cursor: pointer;
+    border: 1px solid;
+    border-bottom: none;
+    width: 100%;
+
+  }
+}
+.sorting-wrapper {
+  display: flex;
+  width: 200px;
+  cursor: pointer;
+  .sorting-head {
+
+  }
+  .sorting-icon {
+    margin-left: 10px;
+  }
+}

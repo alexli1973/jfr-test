@@ -1,0 +1,38 @@
+<div class="tabs-wrapper" *ngIf="tableTabs">
+  <div class="tab-item" *ngFor="let tab of tableTabs">
+    <div class="tab" (click)="displayActiveTabBody(tab)">{{tab | uppercase}}</div>
+  </div>
+</div>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th *ngFor="let head of tableHeader"
+        scope="col"
+        colSort
+        (sortEvent)="sortEventHandler($event)"
+        [sortingQueryString]="head"
+        [sortDirection]="sortDirection"
+    >
+      <div class="sorting-wrapper">
+        <div class="sorting-head">{{head | uppercase}}</div>
+        <div class="sorting-icon" *ngIf="sortingQueryString === head">
+          <i class="fa fa-chevron-up" *ngIf="sortDirection === 'asc'"></i>
+          <i class="fa fa-chevron-down" *ngIf="sortDirection === 'desc'"></i>
+        </div>
+      </div>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  *ngFor="let el of currentTabBody">
+    <td>{{el.vendor}}</td>
+    <td>{{el.name}}</td>
+    <td>{{el.price | number}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #emptyTmpl>
+  not found
+</ng-template>
+
