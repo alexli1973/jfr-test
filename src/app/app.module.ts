@@ -3,14 +3,15 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { MatTableModule } from '@angular/material/table';
+import {ReactiveFormsModule} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app.routing.module';
-import {MdbTabComponent, MdbTabsComponent, MdbTabsModule} from 'mdb-angular-ui-kit/tabs';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {SortDirective} from './core/directive/sort.directive';
+import { SortDirective } from './core/directive/sort.directive';
+import { SearchComponent} from './dashboard/search/search.component';
+import { SearchTextPipe } from './core/pipes/search-text.pipe';
 
 
 
@@ -19,7 +20,9 @@ import {SortDirective} from './core/directive/sort.directive';
   declarations: [
     AppComponent,
     DashboardComponent,
+    SearchComponent,
     SortDirective,
+    SearchTextPipe
   ],
   imports: [
     CommonModule,
@@ -27,12 +30,9 @@ import {SortDirective} from './core/directive/sort.directive';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MdbTabsModule,
-
     NgbModule,
+    ReactiveFormsModule,
 
-    //MDBBootstrapModule.forRoot()
-    //MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

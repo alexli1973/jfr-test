@@ -1,8 +1,9 @@
-import {Component, Directive, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from "rxjs";
 
 import { ApiService } from "../core/services/api.service";
 import { IItem, ITab } from "../models/interfaces";
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +19,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public currentTabBody: IItem[] = [];
   public sortDirection: string = 'asc'
   public sortingQueryString: string = null;
+  public selectedTab: string = '';
+  public searchText: string;
+
+  public searchControl:FormControl = new FormControl('');
 
   private compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;
 
@@ -53,13 +58,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
     const tempTabExists = this.initData.find((elem:ITab) => elem.title === title);
       if (tempTabExists) {
         this.currentTabBody = [...tempTabExists.items];
+        this.selectedTab = title;
       }
+      this.sortEventHandler({
+        sortDirection: 'asc',
+        sortingQueryString: 'vendor'
+      });
+      this.resetControlValue();
   }
 
   public sortEventHandler(ev) {
     this.sortDirection = ev.sortDirection;
     this.sortingQueryString = ev.sortingQueryString;
-    debugger
     this.currentTabBody = this.currentTabBody.sort((a:IItem, b:IItem) => {
       let x = a[this.sortingQueryString];
       let y = b[this.sortingQueryString];
@@ -74,5 +84,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
 
   }
+
+  public handlerInputChange(ev) {
+    this.searchText = ev;
+  }
+
+  public resetControlValue() {
+    this.searchControl.setValue(null);
+  }
+
 
 }

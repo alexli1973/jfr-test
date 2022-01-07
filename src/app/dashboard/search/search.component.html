@@ -1,0 +1,11 @@
+<div class="search-wrapper">
+  <label for="search-item"></label>
+  <input
+    type="text"
+    class="form-control"
+    id="search-item"
+    placeholder="search"
+    [formControl]="searchControl"
+    (ngModelChange)="handlerInputChange($event)"
+  >
+</div>

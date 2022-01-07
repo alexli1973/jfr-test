@@ -1,7 +1,19 @@
-<div class="tabs-wrapper" *ngIf="tableTabs">
-  <div class="tab-item" *ngFor="let tab of tableTabs">
-    <div class="tab" (click)="displayActiveTabBody(tab)">{{tab | uppercase}}</div>
+<div class="menu-wrapper">
+  <div class="tabs-wrapper" *ngIf="tableTabs">
+    <div class="tab-item" *ngFor="let tabName of tableTabs">
+      <div class="tab"
+       [ngClass]="{'active': selectedTab === tabName}"
+       (click)="displayActiveTabBody(tabName)"
+    >
+      {{tabName | uppercase}}
+    </div>
+    </div>
   </div>
+  <app-search
+    [searchControl]="searchControl"
+
+    (onChange)="handlerInputChange($event)"
+  ></app-search>
 </div>
 <table class="table table-striped">
   <thead>
@@ -24,7 +36,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr  *ngFor="let el of currentTabBody">
+  <tr *ngFor="let el of currentTabBody | searchText: {'isVendor':'vendor', 'isName':'name', 'isNumber': ''}: searchText">
     <td>{{el.vendor}}</td>
     <td>{{el.name}}</td>
     <td>{{el.price | number}}</td>

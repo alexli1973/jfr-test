@@ -1,12 +1,29 @@
+$primaryColor: #eaeaea;
+
+.menu-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
 .tabs-wrapper {
   display: flex;
   justify-content: space-between;
   width: 50%;
   .tab-item {
-    cursor: pointer;
-    border: 1px solid;
-    border-bottom: none;
+
     width: 100%;
+    cursor: pointer;
+    .tab {
+      padding: 10px 0 10px 5px;
+      border: 1px solid $primaryColor;
+      border-top-left-radius: 20px;
+      border-bottom: none;
+      text-align: center;
+      &.active {
+        background-color: $primaryColor;
+        font-weight: 700;
+      ;
+      }
+    }
 
   }
 }
